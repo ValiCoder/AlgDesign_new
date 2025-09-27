@@ -2,69 +2,44 @@ package com.valeriy.algdesign;
 
 public class MergeSort {
 
+    // Публичный метод для тестов
+    public static void sort(int[] array) {
+        if (array == null || array.length <= 1) return;
+        int[] buffer = new int[array.length]; // reuse buffer
+        mergeSort(array, buffer, 0, array.length - 1);
+    }
+
+    // Рекурсивный метод
+    private static void mergeSort(int[] array, int[] buffer, int left, int right) {
+        if (left >= right) return;
+
+        int mid = left + (right - left) / 2;
+
+        mergeSort(array, buffer, left, mid);
+        mergeSort(array, buffer, mid + 1, right);
+
+        merge(array, buffer, left, mid, right);
+    }
+
+    // Слияние с буфером
+    private static void merge(int[] array, int[] buffer, int left, int mid, int right) {
+        int i = left, j = mid + 1, k = left;
+
+        while (i <= mid && j <= right) {
+            if (array[i] <= array[j]) buffer[k++] = array[i++];
+            else buffer[k++] = array[j++];
+        }
+        while (i <= mid) buffer[k++] = array[i++];
+        while (j <= right) buffer[k++] = array[j++];
+
+        for (k = left; k <= right; k++) {
+            array[k] = buffer[k];
+        }
+    }
+
     public static void main(String[] args) {
         int[] array = {8, 2, 5, 3, 4, 7, 6, 1};
-
-        mergeSort(array);
-
-        for (int i = 0; i < array.length; i++) {
-            System.out.print(array[i]+ " ");
-        }
-    }
-
-    private static void mergeSort (int[] array) {
-        int length = array.length;
-        if (length<=1) return;
-
-        int middle = length / 2;
-        int[] leftArray = new int[middle];
-        int[] rightArray = new int[length-middle];
-
-        int i = 0;
-        int j = 0;
-
-        for (;i < length; i++){
-            if (i< middle) {
-                leftArray[i] = array[i];
-            }
-            else{
-                rightArray[j] = array[i];
-                j++;
-            }
-        }
-        mergeSort(leftArray);
-        mergeSort(rightArray);
-        merge(leftArray, rightArray, array);
-
-    }
-
-    private static void merge(int[] leftArray, int[] rightArray, int[] array) {
-        int sizeLeft =  array.length/2;
-        int sizeRight = array.length - sizeLeft;
-
-        int i = 0, l = 0, r = 0;
-
-        while (l < sizeLeft && r < sizeRight){
-            if (leftArray[l] < rightArray[r]){
-                array[i] = leftArray[l];
-                i++;
-                l++;
-            }
-            else {
-                array[i] = rightArray[r];
-                i++;
-                r++;
-            }
-        }
-        while(l<sizeLeft){
-            array[i] = leftArray[l];
-            i++;
-            l++;
-        }
-        while(r<sizeRight) {
-            array[i] = rightArray[r];
-            i++;
-            r++;
-        }
+        sort(array);
+        for (int num : array) System.out.print(num + " ");
     }
 }

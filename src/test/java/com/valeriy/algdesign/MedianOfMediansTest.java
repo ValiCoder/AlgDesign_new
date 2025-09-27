@@ -12,7 +12,7 @@ class MedianOfMediansTest {
     @Test
     void testSmallArray() {
         int[] arr = {12, 3, 5, 7, 4, 19, 26};
-        int k = 3; // 4-й наименьший элемент
+        int k = 3;
         int result = MedianOfMedians.select(arr, k);
         int[] sorted = Arrays.copyOf(arr, arr.length);
         Arrays.sort(sorted);
