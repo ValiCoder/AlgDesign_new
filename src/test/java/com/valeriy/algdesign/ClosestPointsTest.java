@@ -43,7 +43,6 @@ class ClosestPointsTest {
         for (int i = 0; i < n; i++)
             points[i] = new Point(rand.nextInt(1000), rand.nextInt(1000));
 
-        // Проверка correctness с brute-force
         double expected = bruteForce(points);
         double actual = ClosestPoints.closestPair(points);
         assertEquals(expected, actual, 1e-6, "Closest pair failed on random subset");
