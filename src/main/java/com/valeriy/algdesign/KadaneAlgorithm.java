@@ -26,8 +26,11 @@ public class KadaneAlgorithm {
 
 
         System.out.println("Max sum = "+ maxSum );
-        System.out.println("Best subarray goes from index " + bestStart +
-                " ("+ array[bestStart] + ") to index " + bestEnd + " (" + array[bestEnd] + ")");
+        System.out.print("Best subarray is: ");
+        for (int i = bestStart; i <=bestEnd; i++) {
+            System.out.print(array[i] + ", ");
+        }
+
     }
 
     public static void main(String[] args) {
