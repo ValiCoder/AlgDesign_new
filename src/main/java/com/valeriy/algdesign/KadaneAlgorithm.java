@@ -52,7 +52,7 @@ public class KadaneAlgorithm {
     }
 
     public static void benchmark() {
-        for (int n = 10_000; n <= 1_000_000; n *= 10) {
+        for (int n = 10_000; n <= 100_000; n *= 10) {
             int[] arr = new int[n];
             java.util.Random rand = new java.util.Random();
             for (int i = 0; i < n; i++) arr[i] = rand.nextInt(2000) - 1000;
@@ -66,10 +66,12 @@ public class KadaneAlgorithm {
         }
     }
 
+
     public static void main(String[] args) {
         int[] array = {1, 3, -10, 9, -4, 5, 7, -10, -2, -3, -5, 6, 4};
         kadaneAlgorithm(array);
         benchmark();
+        benchmarkWithCSV();
     }
 
     public static void benchmarkWithCSV() {
@@ -78,7 +80,9 @@ public class KadaneAlgorithm {
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write("n,timeMs\n");
 
-            for (int n = 10_000; n <= 1_000_000; n *= 10) {
+            int[] sizes = {10, 100, 1_000, 5_000, 10_000, 25_000, 50_000, 75_000, 100_000}; // добавлены маленькие размеры
+
+            for (int n : sizes) {
                 int[] arr = new int[n];
                 java.util.Random rand = new java.util.Random();
                 for (int i = 0; i < n; i++) arr[i] = rand.nextInt(2000) - 1000;
@@ -88,7 +92,8 @@ public class KadaneAlgorithm {
                 long end = System.nanoTime();
 
                 double timeMs = (end - start) / 1_000_000.0;
-                writer.write(n + "," + String.format("%.3f", timeMs) + "\n");
+                writer.write(n + "," + String.format("%.6f", timeMs) + "\n");
+                System.out.printf("n=%d, time=%.6f ms%n", n, timeMs);
             }
 
             System.out.println("Results saved to " + fileName);
