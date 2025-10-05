@@ -1,7 +1,5 @@
-package com.valeriy.algdesign;
+package algorithms;
 
-
-import algorithms.KadaneAlgorithm;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +23,7 @@ class KadaneAlgorithmTest {
     void testMixed() {
         int[] arr = {1, 3, -10, 9, -4, 5, 7, -10, -2, -3, -5, 6, 4};
         int result = KadaneAlgorithm.findMaxSubarraySum(arr);
-        assertEquals(17, result); // Проверь руками
+        assertEquals(17, result);
     }
 
     @Test
@@ -39,5 +37,15 @@ class KadaneAlgorithmTest {
     void testEmptyArray() {
         int[] arr = {};
         assertThrows(IllegalArgumentException.class, () -> KadaneAlgorithm.findMaxSubarraySum(arr));
+    }
+
+    @Test
+    void testFindMaximumSubarrayWithIndices() {
+        int[] arr = {1, 3, -10, 9, -4, 5, 7, -10, -2, -3, -5, 6, 4};
+        KadaneAlgorithm.KadaneResult result = KadaneAlgorithm.findMaximumSubarray(arr);
+
+        assertEquals(17, result.getMaxSum());
+        assertEquals(3, result.getStartIndex());
+        assertEquals(6, result.getEndIndex());
     }
 }
