@@ -9,7 +9,6 @@ public class ClosestPoints {
     public static double closestPair(Point[] points) {
         if (points == null || points.length < 2) return Double.MAX_VALUE;
 
-        // сортировка по x
         Point[] px = Arrays.copyOf(points, points.length);
         Arrays.sort(px, Comparator.comparingInt(p -> p.x));
 
@@ -26,7 +25,6 @@ public class ClosestPoints {
         double dr = closestPairRec(points, mid + 1, right);
         double d = Math.min(dl, dr);
 
-        // полоска
         int size = 0;
         Point[] strip = new Point[right - left + 1];
         for (int i = left; i <= right; i++) {
@@ -35,7 +33,6 @@ public class ClosestPoints {
             }
         }
 
-        // сортировка полоски по y
         Arrays.sort(strip, 0, size, Comparator.comparingInt(p -> p.y));
 
         for (int i = 0; i < size; i++) {

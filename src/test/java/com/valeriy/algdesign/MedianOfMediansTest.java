@@ -23,7 +23,7 @@ public class MedianOfMediansTest {
             long elapsed = System.nanoTime() - start;
 
             double avgTimePerElement = (elapsed / 1000.0) / n;
-            long elapsedMs = elapsed / 1_000_000;
+            long elapsedMs = elapsed / 1000000;
 
             System.out.printf("%d,%d,%d,%d,%.3f%n",
                     n, median, maxRecursionDepth, elapsedMs, avgTimePerElement);
